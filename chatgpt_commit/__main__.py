@@ -2,20 +2,34 @@ import argparse
 import os
 import subprocess
 import sys
+from importlib.metadata import PackageNotFoundError, version
 
 import openai
 
-parser = argparse.ArgumentParser(prog="chatgpt-commit", description="ChatGPT Commit Message Generator")
-parser.add_argument(
-    "-t",
-    "--temperature",
-    type=float,
-    default=1.0,
-    help="set the temperature for the openai model",
-)
+
+def get_package_version(package_name):
+    try:
+        return version(package_name)
+    except PackageNotFoundError:
+        return None
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        prog="chatgpt-commit", description="ChatGPT Commit Message Generator"
+    )
+    parser.add_argument(
+        "-t",
+        "--temperature",
+        type=float,
+        default=1.0,
+        help="set the temperature for the openai model",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {get_package_version('chatgpt_commit')}",
+    )
     args = parser.parse_args()
     openai.organization = os.getenv("OPENAI_ORG_ID")
     openai.api_key = os.getenv("OPENAI_API_KEY")
