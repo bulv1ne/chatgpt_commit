@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "chatgpt-commit"
+version = "0.1.0"
+description = ""
+authors = ["Niels Lemmens <1936122+bulv1ne@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "chatgpt_commit"}]
+
+[tool.poetry.scripts]
+chatgpt-commit = 'chatgpt_commit.__main__:main'
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "*"
+black = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
