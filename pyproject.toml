@@ -17,6 +17,7 @@ openai = "*"
 [tool.poetry.group.dev.dependencies]
 isort = "*"
 black = "*"
+flake8 = "*"
 
 [build-system]
 requires = ["poetry-core"]

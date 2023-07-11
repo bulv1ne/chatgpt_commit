@@ -37,11 +37,10 @@ def main():
     process = subprocess.run(["git", "diff"], check=True, capture_output=True)
     git_diff_output = process.stdout.decode()
 
-    content = "\n\n".join(
-        [
-            "Based on the following Git diff output, could you help me to create an appropriate Git commit message in one line?",
-            git_diff_output,
-        ]
+    content = (
+        "Based on the following Git diff output, could you help me to create an appropriate"
+        " Git commit message in one line?"
+        f"\n\n{git_diff_output}"
     )
     try:
         response = openai.ChatCompletion.create(
