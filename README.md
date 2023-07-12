@@ -6,7 +6,7 @@ A powerful tool that automates the creation of commit messages based on your Git
 Ensure you have pipx installed on your system. If not, you can get it using pip. Then, install the ChatGPT Commit Message Generator using the following command:
 
 ```shell
-pipx install git+https://github.com/bulv1ne/chatgpt_commit 
+pipx install git+https://github.com/bulv1ne/chatgpt_commit
 ```
 
 This will fetch the package directly from the repository and install it on your system.
