@@ -5,6 +5,7 @@ import sys
 from importlib.metadata import PackageNotFoundError, version
 
 import openai
+from dotenv import load_dotenv
 
 
 def get_package_version(package_name):
@@ -14,7 +15,13 @@ def get_package_version(package_name):
         return None
 
 
+def git_diff_output():
+    process = subprocess.run(["git", "diff"], check=True, capture_output=True)
+    return process.stdout.decode()
+
+
 def main():
+    load_dotenv()
     parser = argparse.ArgumentParser(
         prog="chatgpt-commit", description="ChatGPT Commit Message Generator"
     )
@@ -31,16 +38,14 @@ def main():
         version=f"%(prog)s {get_package_version('chatgpt_commit')}",
     )
     args = parser.parse_args()
+
     openai.organization = os.getenv("OPENAI_ORG_ID")
     openai.api_key = os.getenv("OPENAI_API_KEY")
-
-    process = subprocess.run(["git", "diff"], check=True, capture_output=True)
-    git_diff_output = process.stdout.decode()
 
     content = (
         "Based on the following Git diff output, could you help me to create an appropriate"
         " Git commit message in one line?"
-        f"\n\n{git_diff_output}"
+        f"\n\n{git_diff_output()}"
     )
     try:
         response = openai.ChatCompletion.create(
