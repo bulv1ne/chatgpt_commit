@@ -5,6 +5,8 @@ description = ""
 authors = ["Niels Lemmens <1936122+bulv1ne@users.noreply.github.com>"]
 readme = "README.md"
 packages = [{include = "chatgpt_commit"}]
+repository = "https://github.com/bulv1ne/chatgpt_commit/"
+license = "MIT"
 
 [tool.poetry.scripts]
 chatgpt-commit = 'chatgpt_commit.__main__:main'
